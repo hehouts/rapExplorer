@@ -7,27 +7,30 @@
 #    http://shiny.rstudio.com/
 #
 
+# Load necessary libraries
 library(shiny)
 
-# Define UI for application that draws a histogram
-fluidPage(
-
-    # Application title
-    titlePanel("rapExplorer - Ratio And Proportion Explorer for hypothetical microbial abundance data"),
-
-    # Sidebar with a slider input for number of bins
-    sidebarLayout(
-        sidebarPanel(
-            sliderInput("bins",
-                        "Number of bins:",
-                        min = 1,
-                        max = 50,
-                        value = 30)
-        ),
-
-        # Show a plot of the generated distribution
-        mainPanel(
-            plotOutput("distPlot")
-        )
+# Define UI
+shinyUI(fluidPage(
+  titlePanel("rapExplorer - Ratio And Proportion Explorer for hypothetical microbial abundance data"),
+  
+  sidebarLayout(
+    sidebarPanel(
+      # Input: Text box for vector input
+      textInput("vector_input", 
+                "Enter a comma-separated vector of 5 numbers:", 
+                value = "1,2,3,4,5"),
+      # Input: Text box for second vector input
+      textInput("vector_input2", 
+                "Enter a comma-separated vector of 5 numbers for the second plot:", 
+                value = "2,4,6,8,10")
+    ),
+    
+    mainPanel(
+      # Output: Bar Plot
+      plotOutput("barPlot"),
+      plotOutput("barPlot2")
     )
-)
+  )
+))
+
