@@ -87,12 +87,17 @@ rel_abund_exp  <- calculate_rel_abund(experimental)
 rel_abund_exp2 <- calculate_rel_abund(experimental2)
 
 df <- data.frame(species_names, rel_abund_cont, rel_abund_exp, rel_abund_exp2)
+df<- df %>% 
+  pivot_longer(-species_names, names_to = "treatment")
+
 df
 ```
 
 ```{r}
 
-
-ggplot()
+df %>% 
+  group_by(species_names) %>% 
+  ggplot(aes(x = treatment, y = value, fill = species_names)) +
+  geom_col()
 
 ```
