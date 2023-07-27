@@ -1,0 +1,79 @@
+---
+title: "rapExplorer"
+format: html
+editor: visual
+---
+
+## Basic outline of app:
+
+user selects:
+
+-   number of taxa
+
+    -   drop down
+
+-   absolute abundances of each taxa
+
+    -   text box for each number of taxa?
+
+    -   one set for "control" and one set for "experimental"
+
+app produces:
+
+-   2 barplots of absolute abundances, control and experimental
+
+-   2 stacked barplots of relative abundances in each sample
+
+-   a table that displays:
+
+    -   species richness
+
+    -   Shannon diversity
+
+    -   Simpson index
+
+    -   Shannon(?) Evenness
+
+-   another table that shows
+
+    -   dif in relative abundance for each taxa
+
+    -   log fold change ratio of control and experimental groups
+
+```{r}
+
+control      <- c(20, 100, 10, 40, 80) 
+experimental <- c(20, 90, 80, 10, 60)
+experimental2 <- c(200, 900, 800, 100, 600)
+
+
+df_counts <- data.frame(control, experimental)
+df_counts_diff_depth <- data.frame(control, experimental)
+```
+
+```{r}
+
+#install.packages("abdiv")
+library(abdiv)
+
+```
+
+```{r}
+simpson_cont <- round(simpson(x = control),         3)
+simpson_exp  <- round(simpson(x = experimental),    3)
+simpson_exp2 <- round(simpson(x = experimental2),   3)
+
+
+simpson_even_cont  <- round(simpson_e(x = control),       3)
+simpson_even_exp   <- round(simpson_e(x = experimental),  3)
+simpson_even_exp   <- round(simpson_e(x = experimental2), 3)
+
+
+
+
+
+```
+
+```{r}
+
+```
