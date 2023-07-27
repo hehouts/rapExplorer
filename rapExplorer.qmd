@@ -41,9 +41,9 @@ app produces:
     -   log fold change ratio of control and experimental groups
 
 ```{r}
-
-control      <- c(20, 100, 10, 40, 80) 
-experimental <- c(20, 90, 80, 10, 60)
+species_names <- c("A", "B", "C", "D", "E")
+control       <- c(20, 100, 10, 40, 80) 
+experimental  <- c(20, 90, 80, 10, 60)
 experimental2 <- c(200, 900, 800, 100, 600)
 
 
@@ -55,6 +55,7 @@ df_counts_diff_depth <- data.frame(control, experimental)
 
 #install.packages("abdiv")
 library(abdiv)
+library(tidyverse)
 
 ```
 
@@ -68,12 +69,30 @@ simpson_even_cont  <- round(simpson_e(x = control),       3)
 simpson_even_exp   <- round(simpson_e(x = experimental),  3)
 simpson_even_exp   <- round(simpson_e(x = experimental2), 3)
 
+```
 
-
-
+```{r}
+calculate_rel_abund <- function(counts_i) {
+  counts_total <- sum(counts_i)
+  proportions <- counts_i / counts_total
+  rounded_proportions <- round(proportions, 3)
+  return(rounded_proportions)
+}
 
 ```
 
 ```{r}
+rel_abund_cont <- calculate_rel_abund(control)
+rel_abund_exp  <- calculate_rel_abund(experimental)
+rel_abund_exp2 <- calculate_rel_abund(experimental2)
+
+df <- data.frame(species_names, rel_abund_cont, rel_abund_exp, rel_abund_exp2)
+df
+```
+
+```{r}
+
+
+ggplot()
 
 ```
